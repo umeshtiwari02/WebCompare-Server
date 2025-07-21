@@ -108,6 +108,7 @@
 
 	<build>
 		<plugins>
+			<!-- 1. Keep your existing Lombok compiler plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -119,7 +120,24 @@
 							<version>1.18.38</version>
 						</path>
 					</annotationProcessorPaths>
+					<compilerArgs>
+						<arg>-parameters</arg> <!-- For better parameter names in Spring -->
+					</compilerArgs>
 				</configuration>
+			</plugin>
+
+			<!-- 2. Add Spring Boot Maven Plugin (REQUIRED for executable JAR) -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.5.3</version> <!-- Match your Spring Boot version -->
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal> <!-- Creates executable fat JAR -->
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
