@@ -15,11 +15,18 @@ import java.net.URL;
 @Service
 public class IntegratingLlama {
 
-	@Value("${groq.api.url}")
-    private String apiUrl;
+	private static String staticApiUrl;
+    private static String staticApiKey;
+
+    @Value("${groq.api.url}")
+    public void setApiUrl(String url) {
+        staticApiUrl = url;
+    }
 
     @Value("${groq.api.key}")
-    private String apiKey;
+    public void setApiKey(String key) {
+        staticApiKey = key;
+    }
 
     public static String fetchTextFromUrl(String url) throws IOException {
         Document doc = Jsoup.connect(url)
@@ -45,10 +52,10 @@ public class IntegratingLlama {
         }
         """.formatted(prompt.replace("\"", "\\\"")); // Escape quotes
 
-        HttpURLConnection conn = (HttpURLConnection) new URL(apiUrl).openConnection();
+        HttpURLConnection conn = (HttpURLConnection) new URL(staticApiUrl).openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/json");
-        conn.setRequestProperty("Authorization", "Bearer " + apiKey);
+        conn.setRequestProperty("Authorization", "Bearer " + staticApiKey);
         conn.setRequestProperty("User-Agent", "Java/21");
         conn.setDoOutput(true);
 
