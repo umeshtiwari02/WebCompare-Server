@@ -10,9 +10,9 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins(
-                        "web-compare-sigma.vercel.app",
-                        "web-compare-ogkscmk6z-umesh-tiwaris-projects-5a6ac068.vercel.app",
-                        "web-compare-git-main-umesh-tiwaris-projects-5a6ac068.vercel.app",
+                        "https://web-compare-sigma.vercel.app",
+                        "https://web-compare-4ptgt7kks-umesh-tiwaris-projects-5a6ac068.vercel.app",
+                        "https://web-compare-git-main-umesh-tiwaris-projects-5a6ac068.vercel.app",
                         "http://localhost:5173"
                 )
                 .allowedMethods("*")
